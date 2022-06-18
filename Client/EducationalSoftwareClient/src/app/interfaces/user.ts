@@ -1,7 +1,7 @@
 import { UserType } from "./userType";
 
 export interface User {
-    id: number,
+    userId: number,
     username: string,
     password: string,
     userType: string

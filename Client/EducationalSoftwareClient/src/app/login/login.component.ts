@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   public roles;
   selectedRole: UserType = UserType.Teacher;
   user: User = {
-    id: 0,
+    userId: 0,
     username:'',
     password:'',
     userType: ""

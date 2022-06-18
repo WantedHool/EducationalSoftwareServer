@@ -4,7 +4,7 @@ export class Teacher{
     surname?: string;
 
     constructor(){
-        this.userId = -1;
+        this.userId = 0;
         this.name = "";
         this.surname = "";
     }

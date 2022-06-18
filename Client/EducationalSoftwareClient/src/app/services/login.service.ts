@@ -14,13 +14,13 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   login(data: User):Observable<User> {
-    this.url = environment.serverUrl + "/Login/Login";
+    this.url = environment.serverUrl + "/User/Login";
 
     return this.http.post<User>(this.url, data);
   }
 
   register(data: User) {
-    this.url = environment.serverUrl + "/Login/Register";
+    this.url = environment.serverUrl + "/User/Register";
 
     return this.http.post(this.url, data);
   }

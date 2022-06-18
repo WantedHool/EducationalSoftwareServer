@@ -17,7 +17,7 @@ import { UserService } from '../services/user.service';
 export class RegisterComponent implements OnInit {
   userType: string = "";
   user: User = {
-    id: -1,
+    userId: 0,
     username: "",
     password: "",
     userType : ""

@@ -15,14 +15,14 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   selectById(id: number): Observable<User> {
-    let params = new HttpParams().set("id", id);
+    let params = new HttpParams().set("userId", id);
     this.url = environment.serverUrl + "/User/SelectById"
     return this.http.get<User>(this.url, { params: params })
   }
 
   update(user: User){
     this.url = environment.serverUrl + "/User/Update";
-    let params = new HttpParams().set("id", user.id);
+    let params = new HttpParams().set("id", user.userId);
     return this.http.put(this.url, user , {params:params});
   }
 
