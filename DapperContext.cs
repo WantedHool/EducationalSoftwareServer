@@ -10,7 +10,7 @@ namespace EducationalSoftwareServer
 {
     public class DapperContext
     {
-        private string _connectionString = "Data Source=DESKTOP-6HR71TI;Initial Catalog=EducationalSoftware;Integrated Security=True";
+        private string _connectionString = "Data Source=.;Initial Catalog=EducationalSoftware;Integrated Security=True";
         public DapperContext(/*IConfiguration configuration*/)
         {
             //OnConfiguring();
