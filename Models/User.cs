@@ -1,4 +1,4 @@
-﻿namespace EducationalSoftwareServer
+﻿namespace EducationalSoftwareServer.Models
 {
     public class User
     {
