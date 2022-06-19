@@ -14,16 +14,22 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   login(data: User):Observable<User> {
-    debugger
     this.url = environment.serverUrl + "/User/Login";
-
     return this.http.post<User>(this.url, data);
   }
 
   register(data: User) {
     this.url = environment.serverUrl + "/User/Register";
-
     return this.http.post(this.url, data);
   }
+
+  getStudentByUserId(userId: number) {
+    this.url = environment.serverUrl + "/User/GetStudentByUserId/" + userId.toString();
+    return this.http.get(this.url);
+  }
   
+  getTeacherByUserId(userId: number) {
+    this.url = environment.serverUrl + "/User/GetTeacherByUserId/" + userId.toString();
+    return this.http.get(this.url);
+  }
 }

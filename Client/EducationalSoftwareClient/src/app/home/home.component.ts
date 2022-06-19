@@ -13,10 +13,10 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    if (localStorage.getItem("userType") == "Student") {
+    if (localStorage.getItem("userType") == "0") {
       this.userType = "Student"
     }
-    else if (localStorage.getItem("userType") == "Teacher")
+    else if (localStorage.getItem("userType") == "1" )
       this.userType = "Teacher"
   }
 

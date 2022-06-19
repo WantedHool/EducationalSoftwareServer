@@ -1,1 +1,60 @@
-<p>register works!</p>
+<section class="headSection">
+    <div class="headText">
+        Educational Software
+    </div>
+</section>
+<br>
+<mat-card >
+    <mat-card-title class="card_title">Register</mat-card-title>
+    <form #userData="ngForm" class="registerForm">
+        <mat-card-subtitle>Account</mat-card-subtitle>
+        <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input type="text" name="username" matInput [(ngModel)]="student.username" required>
+        </mat-form-field>
+        <br>
+
+        <div class="row">
+            <div class="col-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input type="password" name="password" [(ngModel)]="student.password" matInput required>
+                </mat-form-field>
+            </div>
+
+            <div class="col-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Confirm Password</mat-label>
+                    <input type="password" name="passwordConfirm" matInput  required>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <mat-divider></mat-divider><br>
+        <mat-card-subtitle>Personal Info</mat-card-subtitle>
+
+        <mat-form-field appearance="outline">
+            <mat-label>First name</mat-label>
+            <input type="text" name="firstName" matInput [(ngModel)]="student.firstName" required>
+        </mat-form-field>
+        <br>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Last name</mat-label>
+            <input type="text" name="lastName" matInput [(ngModel)]="student.lastName" required>
+        </mat-form-field>
+        <br>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Class</mat-label>
+            <input type="number" name="class" matInput [(ngModel)]="student.class" required>
+        </mat-form-field>
+        <br>
+
+        <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">Register</button>
+        <br><br>
+        <div>Already have an account?</div>
+        <a [routerLink]="['/login']" class="btn btn-link">Login</a>
+        <br>
+    </form>
+</mat-card>

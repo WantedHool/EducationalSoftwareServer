@@ -1,0 +1,30 @@
+.headSection{
+    width: 100%;
+    height: 70px;
+    background-color:  #3f51b5 ;
+}
+.headText{
+    text-align: center;
+    font-size: xx-large;
+    padding-top: 25px;
+    color:white;  
+}
+.registerForm{
+    text-align: center;
+}
+
+mat-card {
+    margin       : 0 auto;
+    width        : 40%;
+    border-radius: 20px;
+}
+
+.card_title{
+    text-align: center;
+    color:#3f51b5 ;
+    padding-bottom: 10px;
+}
+
+mat-form-field{
+    margin-top: 8px;
+}

@@ -1,11 +1,13 @@
 export class Teacher{
     userId?: number;
-    name?: string;
-    surname?: string;
+    teacherId?: number;
+    firstName?: string;
+    lastName?: string;
 
     constructor(){
         this.userId = 0;
-        this.name = "";
-        this.surname = "";
+        this.teacherId = 0;
+        this.firstName = "";
+        this.lastName = "";
     }
 }
