@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { User } from '../interfaces/user';
+import { User } from '../models/user';
 import { RegisterStudentData } from '../models/registerStudentData';
 import { RegisterTeacherData } from '../models/registerTeacherData';
 import { Student } from '../models/student';
@@ -15,12 +15,12 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  userType: string = "";
+  userType: number = 0;
   user: User = {
     userId: 0,
     username: "",
     password: "",
-    userType : ""
+    userType : 0
   }
   teacher: Teacher = new Teacher();
   student: Student = new Student();
@@ -35,17 +35,17 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.router.url == "/register/Teacher"){
-      this.userType = "Teacher";
+      this.userType = 1;
       this.user.userType = this.userType;
     }
     else if (this.router.url == "/register/Student"){
-      this.userType = "Student";
+      this.userType = 0;
       this.user.userType = this.userType;
     }
   }
 
   onSubmit() {
-    if (this.userType == "Teacher") {
+    if (this.userType == 1) {
       this.regTeacher.user = this.user;
       this.regTeacher.teacher = this.teacher;
       this.registerService.registerTeacher(this.regTeacher).subscribe((success)=> {
@@ -58,7 +58,7 @@ export class RegisterComponent implements OnInit {
     else{
       this.regStudent.username = this.user.username;
       this.regStudent.password = this.user.password;
-      this.regStudent.userType = this.user.userType;
+      //this.regStudent.userType = this.user.userType;
       this.regStudent.firstName = this.student.name;
       this.regStudent.lastName = this.student.surname;
 

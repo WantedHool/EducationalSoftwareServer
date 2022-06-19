@@ -2,9 +2,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
-import { User } from '../interfaces/user';
 import { Student } from '../models/student';
 import { Teacher } from '../models/teacher';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class UserService {
 
   update(user: User){
     this.url = environment.serverUrl + "/User/Update";
-    let params = new HttpParams().set("id", user.userId);
+    let params = new HttpParams().set("id", user.userId ?? 0);
     return this.http.put(this.url, user , {params:params});
   }
 

@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { User } from '../interfaces/user';
 import { RoleMapping, UserType } from '../interfaces/userType';
+import { User } from '../models/user';
 import { AuthService } from '../services/auth.service';
 import { LoginService } from '../services/login.service';
 
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     userId: 0,
     username:'',
     password:'',
-    userType: ""
+    userType: 0
   };
   constructor(private loginService: LoginService, private router: Router, private auth: AuthService, private snackBar: MatSnackBar) {
     this.roles = RoleMapping;
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     this.loginSubscription = this.loginService.login(this.user)
       .subscribe((data) => {
         this.auth.changeLoginStatusTrue();
-        localStorage.setItem("profileType", data.userType.toString());
+        localStorage.setItem("profileType", data.userType?.toString() ?? "");
         this.snackBar.open("Login successfull!","OK",{duration:5000})
         this.router.navigate(['/home']);
         

@@ -1,4 +1,4 @@
-import { User } from "../interfaces/user";
+import { User } from "./user";
 import { Teacher } from "./teacher";
 
 export class RegisterTeacherData{
