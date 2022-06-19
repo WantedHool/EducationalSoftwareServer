@@ -1,1 +1,53 @@
-<p>nav works!</p>
+<div *ngIf="userType=='Teacher'">
+    <mat-nav-list>
+        <a mat-list-item [routerLink]="['/home']" class="link home">
+            <mat-icon>home</mat-icon>&nbsp;Αρχική Σελίδα
+        </a>
+        <div>
+            <a mat-list-item class="link" [routerLink]="['/', ]">
+                <mat-icon>event_available</mat-icon>&nbsp;Θεωρία
+            </a>
+            <a mat-list-item class="link" [routerLink]="['/', ]">
+                <mat-icon>people</mat-icon>&nbsp;Ασκήσεις
+            </a>
+        </div>
+        <div>
+            <a mat-list-item class="link" [routerLink]="['/']">
+                <mat-icon>event_available</mat-icon>&nbsp;Διαγωνίσματα
+            </a>
+            <a mat-list-item class="link" [routerLink]="['/']">
+                <mat-icon>people</mat-icon>&nbsp;Βαθμολογία Μαθητών
+            </a>
+        </div>
+        <a mat-list-item (click)="logOut()" [routerLink]="['/']" class="logout link">
+            <mat-icon>logout</mat-icon>&nbsp;Αποσύνδεση
+        </a>
+    </mat-nav-list>
+</div>
+
+<div *ngIf="userType=='Student'">
+    <mat-nav-list>
+        <a mat-list-item [routerLink]="['/home']" class="link home">
+            <mat-icon>home</mat-icon>&nbsp;Αρχική Σελίδα
+        </a>
+        <div>
+            <a mat-list-item class="link" [routerLink]="['/', ]">
+                <mat-icon>event_available</mat-icon>&nbsp;Θεωρία
+            </a>
+            <a mat-list-item class="link" [routerLink]="['/', ]">
+                <mat-icon>people</mat-icon>&nbsp;Ασκήσεις
+            </a>
+        </div>
+        <div>
+            <a mat-list-item class="link" [routerLink]="['/']">
+                <mat-icon>event_available</mat-icon>&nbsp;Διαγωνίσματα
+            </a>
+            <a mat-list-item class="link" [routerLink]="['/']">
+                <mat-icon>people</mat-icon>&nbsp;Βαθμολογία
+            </a>
+        </div>
+        <a mat-list-item (click)="logOut()" [routerLink]="['/']" class="logout link">
+            <mat-icon>logout</mat-icon>&nbsp;Αποσύνδεση
+        </a>
+    </mat-nav-list>
+</div>

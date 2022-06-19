@@ -1,0 +1,17 @@
+mat-sidenav-container {
+    height: 100%
+}
+
+mat-sidenav {
+    overflow: hidden;
+}
+
+mat-sidenav {
+    background: #3f51b5;
+    border    : none;
+}
+
+.content {
+    left : 0;
+    right: 0;
+}

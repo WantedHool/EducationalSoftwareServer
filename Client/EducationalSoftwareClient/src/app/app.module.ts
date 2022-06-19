@@ -26,6 +26,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSortModule } from '@angular/material/sort';
 import { FormsModule } from '@angular/forms';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { GradesComponent } from './grades/grades.component';
+import { TheoryComponent } from './theory/theory.component';
+import { TestsComponent } from './tests/tests.component';
 
 
 @NgModule({
@@ -34,7 +37,10 @@ import { MatGridListModule } from '@angular/material/grid-list';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    NavComponent
+    NavComponent,
+    GradesComponent,
+    TheoryComponent,
+    TestsComponent
   ],
   imports: [
     BrowserModule,

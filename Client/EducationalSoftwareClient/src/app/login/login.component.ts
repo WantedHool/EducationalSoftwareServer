@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { RoleMapping, UserType } from '../interfaces/userType';
 import { User } from '../models/user';
+import { RoleMapping, UserType } from '../models/userType';
 import { AuthService } from '../services/auth.service';
 import { LoginService } from '../services/login.service';
 
@@ -18,8 +18,8 @@ export class LoginComponent implements OnInit {
   loginSubscription: Subscription = new Subscription();
   currentUser?: Observable<User>;
   message?: string;
-  public roles;
-  selectedRole: UserType = UserType.Teacher;
+  public userTypes;
+  selectedUser: UserType = UserType.Teacher;
   user: User = {
     userId: 0,
     username:'',
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     userType: 0
   };
   constructor(private loginService: LoginService, private router: Router, private auth: AuthService, private snackBar: MatSnackBar) {
-    this.roles = RoleMapping;
+    this.userTypes = RoleMapping;
   }
 
   ngOnInit(): void {
@@ -36,19 +36,27 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     this.loginSubscription = this.loginService.login(this.user)
-      .subscribe((data) => {
+      .subscribe((user) => {
         this.auth.changeLoginStatusTrue();
-        localStorage.setItem("profileType", data.userType?.toString() ?? "");
-        this.snackBar.open("Login successfull!","OK",{duration:5000})
-        this.router.navigate(['/home']);
-        
+        if (user.userType === 0){
+          const student = this.loginService.getStudentByUserId(user.userId ?? 0);
+          localStorage.setItem("student", JSON.stringify(student));
+          this.router.navigate(['/home/Student']);
+        }
+       else{
+        const teacher = this.loginService.getTeacherByUserId(user.userId ?? 0);
+          localStorage.setItem("teacher", JSON.stringify(teacher));
+          this.router.navigate(['/home/Teacher']);
+       }
+       localStorage.setItem("userType",user.userType?.toString() ?? "");
+        this.snackBar.open("Login successfull!","OK",{duration:5000}) 
       },(err) => {
         this.snackBar.open("Wrong username or password","OK",{duration:5000})
       });
   }
 
   goToRegister(): void {
-    this.router.navigate(["/register/" + this.roles[this.selectedRole].type]);
+    this.router.navigate(["/register/Student"]);
   }
 
   handleError(error: HttpErrorResponse) {

@@ -1,0 +1,22 @@
+.navbar {
+    justify-content: space-between;
+}
+
+.link {
+    text-decoration: none;
+    color          : azure;
+}
+
+mat-toolbar {
+    border: none;
+}
+
+.title {
+    display    : inline-block;
+    margin-left: 5px;
+}
+
+mat-icon {
+    vertical-align: sub;
+    margin-left   : 8px;
+}
