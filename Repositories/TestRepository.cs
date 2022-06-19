@@ -22,32 +22,97 @@ namespace EducationalSoftwareServer
                           OUTPUT  inserted.*
                           VALUES(@Description,@TestId,@Type,@Category)";
 
-            var questionAnswersQuery = @"INSERT INTO QUESTIONS
+            var questionAnswersQuery = @"INSERT INTO QUESTIONANSWERS
                           OUTPUT  inserted.*
-                          VALUES(@Description,@QuestionId,@Answer,@IsRight)";
+                          VALUES(@QuestionId,@Answer,@IsRight)";
 
             using (var connection = _context.CreateConnection())
             {
                 var createdTest = connection.Query<Test>(testQuery, new { Description = test.Description, ChapterId = test.ChapterId, Class = test.Class, Active = test.Active }).FirstOrDefault();
                 foreach(var question in test.Questions)
                 {
-                    var createdQuestion = connection.Query<Question>(questionsQuery, new {Description = question.Description, TestId = createdTest.TeacherId, Type = question.Type, Category = question.Category}).FirstOrDefault();
+                    var createdQuestion = connection.Query<Question>(questionsQuery, new {Description = question.Description, TestId = createdTest.TestId, Type = question.Type, Category = question.Category}).FirstOrDefault();
                     foreach(var questionAnswer in question.QuestionAnswers)
                     {
-                        connection.Query<QuestionAnswer>(questionAnswersQuery, new { Description = questionAnswer.Answer, QuestionId = createdQuestion.QuestionId, Answer = questionAnswer.Answer, IsRight = questionAnswer.IsRight });
+                        connection.Query<QuestionAnswer>(questionAnswersQuery, new {QuestionId = createdQuestion.QuestionId, Answer = questionAnswer.Answer, IsRight = questionAnswer.IsRight });
                     }
                 }
             }
         }
+
+        public static List<Test> GetTestsByTeacherId(int teacherId)
+        {
+            var testQuery = @"SELECT * FROM TESTS WHERE TeacherId = @TeacherId";
+            using (var connection = _context.CreateConnection())
+            {
+                return connection.Query<Test>(testQuery, new { TeacherId = teacherId}).ToList();
+            }
+        }
         #endregion
 
-        //public static GetTestById(int testId)
-        //{
-        //    var testQuery = @"SELECT * FROM TESTS WHERE TestId = @TestId";
+        public static Test GetTestById(int testId)
+        {
+            var testQuery = @"SELECT * FROM TESTS WHERE TestId = @TestId";
 
-        //    var questionsQuery = @"SELECT * FROM QUESTIONS WHERE TestId = @TestId";
+            var questionsQuery = @"SELECT * FROM QUESTIONS WHERE TestId = @TestId";
 
-        //    var questionAnswersQuery = @"SELECT * FROM QUESTIONANSWERS WHERE QuestionId = @QuestionId";
-        //}
+            var questionAnswersQuery = @"SELECT * FROM QUESTIONANSWERS WHERE QuestionId = @QuestionId";
+
+            var test = new Test();
+
+            using (var connection = _context.CreateConnection())
+            {
+                test = connection.Query<Test>(testQuery, new {TestId = testId}).FirstOrDefault();
+                
+                test.Questions = connection.Query<Question>(questionsQuery, new { TestId = testId }).ToList();
+
+                foreach (var question in test.Questions)
+                {
+                    question.QuestionAnswers = connection.Query<QuestionAnswer>(questionAnswersQuery, new {QuestionId = question.QuestionId}).ToList();
+                }               
+            }
+            return test;
+        }
+        #region StudentOperations
+        public static List<Test> GetTestsByClass(int studentClass)
+        {
+            var testQuery = @"SELECT * FROM TESTS WHERE Class = @Class AND Active = 'true'";
+            using (var connection = _context.CreateConnection())
+            {
+               return connection.Query<Test>(testQuery, new { Class = studentClass }).ToList();
+            }
+        }
+
+        public static TestResult AnswerTest(List<StudentAnswer> studentAnswers)
+        {
+            var answersQuery = @"INSERT INTO STUDENTANSWERS
+                          OUTPUT  inserted.*
+                          VALUES(@TestId,@StudentId,@QuestionId,@StudentResult)";
+
+            var testResultQuery = @"INSERT INTO TESTRESULTS
+                          OUTPUT  inserted.*
+                          VALUES(@StudentId,@TestId,@TotalGrade)";
+
+            using (var connection = _context.CreateConnection())
+            {
+                var test = GetTestById(studentAnswers[0].TestId);
+                var rightAnswers = 0;
+                foreach (var studentAnswer in studentAnswers)
+                {
+                    var question = test.Questions.Where(x => x.QuestionId == studentAnswer.QuestionId).FirstOrDefault();
+                    if (question.QuestionAnswers.Any(x => x.Answer == studentAnswer.StudentResult && x.IsRight))
+                        rightAnswers++;
+
+                    connection.Query<StudentAnswer>(answersQuery,
+                    new { TestId = studentAnswer.TestId, StudentId = studentAnswer.StudentId, QuestionId = studentAnswer.QuestionId, StudentResult = studentAnswer.StudentResult})
+                        .ToList();
+                }
+                float totalGrade = (rightAnswers * 100) / studentAnswers.Count();
+                return connection.Query<TestResult>(testResultQuery,
+                       new { StudentId = studentAnswers[0].StudentId, TestId = studentAnswers[0].TestId,  TotalGrade = totalGrade }).FirstOrDefault();
+            }
+        }
+        #endregion
+
     }
 }

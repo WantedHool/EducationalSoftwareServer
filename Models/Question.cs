@@ -10,8 +10,8 @@ namespace EducationalSoftwareServer.Models
         public int QuestionId { get; set; }
         public int TestId { get; set; }
         public string Description { get; set; }
-        public int Type { get; set; }
-        public int Category { get; set; }
+        public string Type { get; set; }
+        public string Category { get; set; }
         public List<QuestionAnswer> QuestionAnswers { get; set; }
 
     }
