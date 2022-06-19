@@ -26,6 +26,7 @@ export class NavComponent implements OnInit {
 
   logOut(): void {
     this.auth.logOut();
+    localStorage.clear();
   }
 }
 

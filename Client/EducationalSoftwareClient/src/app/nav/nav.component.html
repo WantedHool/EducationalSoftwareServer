@@ -4,18 +4,15 @@
             <mat-icon>home</mat-icon>&nbsp;Αρχική Σελίδα
         </a>
         <div>
-            <a mat-list-item class="link" [routerLink]="['/', ]">
+            <a mat-list-item class="link" [routerLink]="['home/Teacher/theory', ]">
                 <mat-icon>event_available</mat-icon>&nbsp;Θεωρία
-            </a>
-            <a mat-list-item class="link" [routerLink]="['/', ]">
-                <mat-icon>people</mat-icon>&nbsp;Ασκήσεις
             </a>
         </div>
         <div>
-            <a mat-list-item class="link" [routerLink]="['/']">
+            <a mat-list-item class="link" [routerLink]="['home/Teacher/tests']">
                 <mat-icon>event_available</mat-icon>&nbsp;Διαγωνίσματα
             </a>
-            <a mat-list-item class="link" [routerLink]="['/']">
+            <a mat-list-item class="link" [routerLink]="['home/Teacher/grades']">
                 <mat-icon>people</mat-icon>&nbsp;Βαθμολογία Μαθητών
             </a>
         </div>
@@ -31,19 +28,16 @@
             <mat-icon>home</mat-icon>&nbsp;Αρχική Σελίδα
         </a>
         <div>
-            <a mat-list-item class="link" [routerLink]="['/', ]">
+            <a mat-list-item class="link" [routerLink]="['/theory', ]">
                 <mat-icon>event_available</mat-icon>&nbsp;Θεωρία
-            </a>
-            <a mat-list-item class="link" [routerLink]="['/', ]">
-                <mat-icon>people</mat-icon>&nbsp;Ασκήσεις
             </a>
         </div>
         <div>
-            <a mat-list-item class="link" [routerLink]="['/']">
+            <a mat-list-item class="link" [routerLink]="['/tests']">
                 <mat-icon>event_available</mat-icon>&nbsp;Διαγωνίσματα
             </a>
-            <a mat-list-item class="link" [routerLink]="['/']">
-                <mat-icon>people</mat-icon>&nbsp;Βαθμολογία
+            <a mat-list-item class="link" [routerLink]="['/grades']">
+                <mat-icon>people</mat-icon>&nbsp;Βαθμολογία Μαθητών
             </a>
         </div>
         <a mat-list-item (click)="logOut()" [routerLink]="['/']" class="logout link">

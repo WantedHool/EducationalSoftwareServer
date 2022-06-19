@@ -1,1 +1,7 @@
-<p>grades works!</p>
+<div *ngIf="userType=='Teacher'" style="color: red;">
+    <p>You are the worst teacher</p>
+</div>
+
+<div *ngIf="userType=='Student'"  style="color: blue;">
+    <p>See you next year</p>
+</div>
