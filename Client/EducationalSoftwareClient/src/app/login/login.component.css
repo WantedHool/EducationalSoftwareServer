@@ -27,6 +27,7 @@ mat-card {
     margin       : 0 auto;
     width        : 20%;
     border-radius: 20px;
+    background-color: #404143 !important;
 }
 
 .card_title {
