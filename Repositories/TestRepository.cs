@@ -96,23 +96,50 @@ namespace EducationalSoftwareServer
             using (var connection = _context.CreateConnection())
             {
                 var test = GetTestById(studentAnswers[0].TestId);
-                var rightAnswers = 0;
+                var rightAnswers = new List<StudentAnswer>();
+                var wrongAnswers = new List<StudentAnswer>();
                 foreach (var studentAnswer in studentAnswers)
                 {
                     var question = test.Questions.Where(x => x.QuestionId == studentAnswer.QuestionId).FirstOrDefault();
                     if (question.QuestionAnswers.Any(x => x.Answer == studentAnswer.StudentResult && x.IsRight))
-                        rightAnswers++;
+                        rightAnswers.Add(studentAnswer);
+                    else
+                        wrongAnswers.Add(studentAnswer);
 
                     connection.Query<StudentAnswer>(answersQuery,
                     new { TestId = studentAnswer.TestId, StudentId = studentAnswer.StudentId, QuestionId = studentAnswer.QuestionId, StudentResult = studentAnswer.StudentResult})
                         .ToList();
                 }
-                float totalGrade = (rightAnswers * 100) / studentAnswers.Count();
+
+                float totalGrade = (rightAnswers.Count() * 100) / studentAnswers.Count();
+
                 return connection.Query<TestResult>(testResultQuery,
                        new { StudentId = studentAnswers[0].StudentId, TestId = studentAnswers[0].TestId,  TotalGrade = totalGrade }).FirstOrDefault();
             }
         }
         #endregion
+        private static void CheckIfStudentTest(List<StudentAnswer> wrongAnswers, List<StudentAnswer> rightAnswers , List<Question> questions)
+        {
+            var wrongAnswersExtra = wrongAnswers.Join(questions, wrongAnswer => wrongAnswer.QuestionId, question => question.QuestionId, (wrongAnswer, question) => question);
 
+            var rightAnswersExtra = rightAnswers.Join(questions, rightAnswer => rightAnswer.QuestionId, question => question.QuestionId, (rightAnswer, question) => question);
+
+            var kati = wrongAnswersExtra.GroupBy(x => x.Category).ToList();
+
+            var kati2 = rightAnswersExtra.GroupBy(x => x.Category).ToList();
+
+
+            kati.ForEach(x =>
+            {
+                bool needHelp;
+                var kamposa = kati2.Where(y => y.Key == x.Key).FirstOrDefault();
+
+                var athroisma = x.Count() + kamposa.Count();
+                if (x.Count() * 100 / athroisma > 50)
+                    needHelp = true;
+                    //todo Insert to table in which Student needs help
+
+            });
+        }
     }
 }
