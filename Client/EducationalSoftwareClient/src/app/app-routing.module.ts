@@ -4,6 +4,7 @@ import { GradesComponent } from './grades/grades.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { StudentDetailComponent } from './student-detail/student-detail.component';
 import { TestsComponent } from './tests/tests.component';
 import { TheoryComponent } from './theory/theory.component';
 
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'home/Teacher/theory', component: TheoryComponent},
   { path: 'home/Student', component: HomeComponent},
   { path: 'home/Student/Grades', component: GradesComponent},
+  { path: 'home/Student/GradeDetail', component: StudentDetailComponent},
   { path: 'home/Student/Tests', component: TestsComponent},
   { path: 'home/Student/Theory', component: TheoryComponent}
 

@@ -1,7 +1,60 @@
-<div *ngIf="userType=='Teacher'" style="color: red;">
-    <p>You are the worst teacher</p>
-</div>
+<!-- <div *ngIf="userType=='Teacher'" style="color: red;"> -->
 
+<!-- </div> -->
+<table mat-table *ngIf="dataSource && userType=='Teacher'" [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="studentId">
+      <th mat-header-cell *matHeaderCellDef> Student</th>
+      <td mat-cell *matCellDef="let element"> {{element.studentId}} </td>
+    </ng-container>
+  
+
+    <ng-container matColumnDef="totalGrade">
+      <th mat-header-cell *matHeaderCellDef> Grade </th>
+      <td mat-cell *matCellDef="let element"> {{element.totalGrade}} </td>
+    </ng-container>
+  
+   
+    <ng-container matColumnDef="details">
+      <th mat-header-cell *matHeaderCellDef> Details </th>
+      <td mat-cell *matCellDef="let element"> <button (click)="openDetail(element.studentId)">Details</button> </td>
+    </ng-container>
+  
+   
+    <!-- <ng-container matColumnDef="EstimatedDate">
+      <th mat-header-cell *matHeaderCellDef> EstimatedDate </th>
+      <td mat-cell *matCellDef="let element"> {{element.estimatedArrivalDate}} </td>
+    </ng-container> -->
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+  </table>
 <div *ngIf="userType=='Student'"  style="color: blue;">
-    <p>See you next year</p>
+    <h1>MO: {{mo}}</h1>
+    <table mat-table *ngIf="dataSource && userType=='Student'" [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="testId">
+          <th mat-header-cell *matHeaderCellDef> Test</th>
+          <td mat-cell *matCellDef="let element"> {{element.testId}} </td>
+        </ng-container>
+      
+  
+        <ng-container matColumnDef="totalGrade">
+          <th mat-header-cell *matHeaderCellDef> Grade </th>
+          <td mat-cell *matCellDef="let element"> {{element.totalGrade}} </td>
+        </ng-container>
+      
+       
+        <!-- <ng-container matColumnDef="OrderDate">
+          <th mat-header-cell *matHeaderCellDef> OrderDate </th>
+          <td mat-cell *matCellDef="let element"> {{element.orderDate}} </td>
+        </ng-container>
+      
+       
+        <ng-container matColumnDef="EstimatedDate">
+          <th mat-header-cell *matHeaderCellDef> EstimatedDate </th>
+          <td mat-cell *matCellDef="let element"> {{element.estimatedArrivalDate}} </td>
+        </ng-container> -->
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
 </div>

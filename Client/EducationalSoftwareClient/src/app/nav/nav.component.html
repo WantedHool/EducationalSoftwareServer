@@ -1,6 +1,6 @@
 <div *ngIf="userType=='Teacher'">
     <mat-nav-list>
-        <a mat-list-item [routerLink]="['/home']" class="link home">
+        <a mat-list-item [routerLink]="['/home/Teacher']" class="link home">
             <mat-icon>home</mat-icon>&nbsp;Αρχική Σελίδα
         </a>
         <div>
@@ -24,20 +24,20 @@
 
 <div *ngIf="userType=='Student'">
     <mat-nav-list>
-        <a mat-list-item [routerLink]="['/home']" class="link home">
+        <a mat-list-item [routerLink]="['/home/Student']" class="link home">
             <mat-icon>home</mat-icon>&nbsp;Αρχική Σελίδα
         </a>
         <div>
-            <a mat-list-item class="link" [routerLink]="['home/Student/theory', ]">
+            <a mat-list-item class="link" [routerLink]="['home/Student/Theory']">
                 <mat-icon>event_available</mat-icon>&nbsp;Θεωρία
             </a>
         </div>
         <div>
-            <a mat-list-item class="link" [routerLink]="['home/Student/tests']">
+            <a mat-list-item class="link" [routerLink]="['home/Student/Tests']">
                 <mat-icon>event_available</mat-icon>&nbsp;Διαγωνίσματα
             </a>
-            <a mat-list-item class="link" [routerLink]="['home/Student/grades']">
-                <mat-icon>people</mat-icon>&nbsp;Βαθμολογία Μαθητών
+            <a mat-list-item class="link" [routerLink]="['home/Student/Grades']">
+                <mat-icon>people</mat-icon>&nbsp;Βαθμολογίες
             </a>
         </div>
         <a mat-list-item (click)="logOut()" [routerLink]="['/']" class="logout link">

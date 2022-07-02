@@ -39,8 +39,7 @@ export class LoginComponent implements OnInit {
       .subscribe((user) => {
         this.auth.changeLoginStatusTrue();
         if (user.userType === 0){
-          const student = this.loginService.getStudentByUserId(user.userId ?? 0);
-          localStorage.setItem("student", JSON.stringify(student));
+          this.loginService.getStudentByUserId(user.userId ?? 0).subscribe(x =>localStorage.setItem("student", JSON.stringify(x)));
           this.router.navigate(['/home/Student']);
         }
        else{

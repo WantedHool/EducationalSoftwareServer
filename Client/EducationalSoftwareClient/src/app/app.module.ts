@@ -29,6 +29,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { GradesComponent } from './grades/grades.component';
 import { TheoryComponent } from './theory/theory.component';
 import { TestsComponent } from './tests/tests.component';
+import { StudentDetailComponent } from './student-detail/student-detail.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { TestsComponent } from './tests/tests.component';
     NavComponent,
     GradesComponent,
     TheoryComponent,
-    TestsComponent
+    TestsComponent,
+    StudentDetailComponent
   ],
   imports: [
     BrowserModule,

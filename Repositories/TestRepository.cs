@@ -73,6 +73,21 @@ namespace EducationalSoftwareServer
             }
             return test;
         }
+
+        public static List<StudentGrade> GetStudentGrades(string schoolClass)
+        {
+            var resultsQuery = @"SELECT * FROM TESTRESULTS";
+            var studentGrades = new List<StudentGrade>();
+            using (var connection = _context.CreateConnection())
+            {
+                var results = connection.Query<TestResult>(resultsQuery).GroupBy(x => x.StudentId).ToList();
+                results.ForEach(x =>
+                {
+                    studentGrades.Add(new StudentGrade() {StudentId = x.Key, TotalGrade = x.Sum(i => i.TotalGrade) / x.Count()});
+                });
+                return studentGrades;
+            }
+        }
         #region StudentOperations
         public static List<Test> GetTestsByClass(int studentClass)
         {
@@ -80,6 +95,15 @@ namespace EducationalSoftwareServer
             using (var connection = _context.CreateConnection())
             {
                return connection.Query<Test>(testQuery, new { Class = studentClass }).ToList();
+            }
+        }
+
+        public static List<TestResult> GetTestResultsByStudentId(int studentId)
+        {
+            var resultsQuery = @"SELECT * FROM TESTRESULTS WHERE StudentId = @StudentId";
+            using (var connection = _context.CreateConnection())
+            {
+                return connection.Query<TestResult>(resultsQuery, new { StudentId = studentId }).ToList();
             }
         }
 
@@ -112,34 +136,78 @@ namespace EducationalSoftwareServer
                 }
 
                 float totalGrade = (rightAnswers.Count() * 100) / studentAnswers.Count();
+                CheckIfStudentTest(wrongAnswers, rightAnswers, test.Questions);
 
                 return connection.Query<TestResult>(testResultQuery,
                        new { StudentId = studentAnswers[0].StudentId, TestId = studentAnswers[0].TestId,  TotalGrade = totalGrade }).FirstOrDefault();
             }
         }
         #endregion
+        public static Test GenerateLearningDifficultyTest(int testId, string category)
+        {
+            var questions = GetQuestionsByCategory(category);
+
+            var test = GetTestById(testId);
+
+            test.Questions = questions.Take(10).ToList();
+            return test;
+
+        }
+        public static List<Question> GetQuestionsByCategory(string category)
+        {
+            var questionsQuery = @"SELECT * FROM QUESTIONS WHERE Category = @Category";
+
+            var questionAnswersQuery = @"SELECT * FROM QUESTIONANSWERS WHERE QuestionId = @QuestionId";
+
+            using (var connection = _context.CreateConnection())
+            {
+                var questions =  connection.Query<Question>(questionsQuery,
+                       new { Category = category}).Where(y => y.TestId == null).ToList();
+
+                questions.ForEach(q =>
+                {
+                    q.QuestionAnswers = connection.Query<QuestionAnswer>(questionAnswersQuery,
+                       new { QuestionId = q.QuestionId}).ToList();
+                });
+                return questions;
+            }
+        }
         private static void CheckIfStudentTest(List<StudentAnswer> wrongAnswers, List<StudentAnswer> rightAnswers , List<Question> questions)
         {
             var wrongAnswersExtra = wrongAnswers.Join(questions, wrongAnswer => wrongAnswer.QuestionId, question => question.QuestionId, (wrongAnswer, question) => question);
 
             var rightAnswersExtra = rightAnswers.Join(questions, rightAnswer => rightAnswer.QuestionId, question => question.QuestionId, (rightAnswer, question) => question);
 
-            var kati = wrongAnswersExtra.GroupBy(x => x.Category).ToList();
+            var categories = new List<string>() { "A", "B", "C" };
 
-            var kati2 = rightAnswersExtra.GroupBy(x => x.Category).ToList();
-
-
-            kati.ForEach(x =>
+            categories.ForEach(c =>
             {
-                bool needHelp;
-                var kamposa = kati2.Where(y => y.Key == x.Key).FirstOrDefault();
+                var catWrongAnswers = wrongAnswersExtra.Where(x => x.Category == c);
+                var catRightAnswers = rightAnswersExtra.Where(x => x.Category == c);
 
-                var athroisma = x.Count() + kamposa.Count();
-                if (x.Count() * 100 / athroisma > 50)
-                    needHelp = true;
-                    //todo Insert to table in which Student needs help
+                if(catWrongAnswers.Count() > catRightAnswers.Count())
+                {
+                    var learningDifficultiesQuery = @"INSERT INTO LEARNINGDIFFICULTIES
+                          OUTPUT  inserted.*
+                          VALUES(@StudentId,@Category,@TestId)";
 
+                    var learningDifficultyTestQuery = @"INSERT INTO TESTS (Description,Active,StudentId) 
+                          OUTPUT  inserted.*
+                          VALUES(@Description,@Active,@StudentId)";
+                    using (var connection = _context.CreateConnection())
+                    {
+                        var test = connection.Query<Test>(learningDifficultyTestQuery,
+                        new { Description = "kati", Active = true, StudentId = rightAnswers[0].StudentId }).FirstOrDefault();
+
+                        connection.Query<LearningDifficulty>(learningDifficultiesQuery,
+                        new { StudentId = rightAnswers[0].StudentId, Category = c, TestId = test.TestId });
+
+                        
+                    }
+
+                }
             });
+
         }
     }
 }
