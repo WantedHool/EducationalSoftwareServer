@@ -30,6 +30,8 @@ import { GradesComponent } from './grades/grades.component';
 import { TheoryComponent } from './theory/theory.component';
 import { TestsComponent } from './tests/tests.component';
 import { StudentDetailComponent } from './student-detail/student-detail.component';
+import { ChaptersComponent } from './chapters/chapters.component';
+import { NewChapterComponent } from './new-chapter/new-chapter.component';
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import { StudentDetailComponent } from './student-detail/student-detail.componen
     GradesComponent,
     TheoryComponent,
     TestsComponent,
-    StudentDetailComponent
+    StudentDetailComponent,
+    ChaptersComponent,
+    NewChapterComponent
   ],
   imports: [
     BrowserModule,
