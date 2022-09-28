@@ -1,0 +1,54 @@
+<div class="padding" style="color: black;">
+	<div class="row col-md-10">
+		<h2 style="color:black;">Καινούριο διαγώνισμα</h2>
+	</div>
+    <div>
+        <mat-form-field class="example-full-width title" appearance="fill" [(ngModel)]="test.description">
+            <mat-label>Τίτλος Διαγωνίσματος</mat-label>
+            <input matInput placeholder="Πληκτρολογήστε...">
+        </mat-form-field>
+    </div>
+    <div class="row col-12 popup-field">
+        <mat-checkbox style="margin:0px" name="active" [(ngModel)]="test.active">
+            Active
+        </mat-checkbox>
+    </div>
+	<div class="row col-md-2">
+		<button mat-icon-button color="primary" (click)="addNewQuestion()">
+			<mat-icon>library_add</mat-icon>
+			Προσθήκη ερώτησης
+		</button>
+	</div>
+</div>
+<div class="list-card" *ngFor="let question of test.questions; let i = index">
+    <div class="col-md-2">
+      <!-- <app-questions ></app-questions> -->
+      <div style="color:black;" class="padding ">
+        <form class="list-card" style="background-color:rgb(227, 227, 227);"> 
+            <div class="row">
+                <div class="col-8" style="margin-top: 10px;">
+                    <h3>Εκφώνηση Άσκησης<span style="color: red">*</span></h3>
+                    <mat-form-field class="example-full-width" appearance="fill" [(ngModel)]="question.description">
+                        <mat-label>Εκφώνηση</mat-label>
+                        <input matInput placeholder="Πληκτρολογήστε...">
+                    </mat-form-field>
+                    <!-- <div class="col-md-4">
+                        <mat-form-field class="popup-field">
+                            <mat-select [(ngModel)]="option.type" placeholder="Type"
+                                (ngModelChange)="onQuestionTypeChange(option)">
+                                <mat-option *ngFor="let questionType of questionsTypes">
+                                    {{questionType.value}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div> -->
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
+</div>
+<div mat-dialog-actions style="padding: 10px;">
+    <button mat-flat-button color="primary" (click)="saveTest()">Save</button>
+<br><br>
+    <button mat-flat-button>Cancel</button>
+</div>

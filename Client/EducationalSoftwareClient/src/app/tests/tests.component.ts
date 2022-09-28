@@ -19,4 +19,8 @@ export class TestsComponent implements OnInit {
     else if (localStorage.getItem("userType") == "1" )
       this.userType = "Teacher"
   }
+
+  addNewTest(): void {
+    this.router.navigate(["home/Teacher/tests/newtest"]);
+  }
 }
