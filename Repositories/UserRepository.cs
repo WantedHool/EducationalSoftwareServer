@@ -52,6 +52,16 @@ namespace EducationalSoftwareServer
             }
         }
 
+        public static List<Student> GetAllStudents()
+        {
+            var query = @"SELECT * FROM STUDENTS";
+            using (var connection = _context.CreateConnection())
+            {
+                return connection.Query<Student>(query).ToList();
+            }
+
+        }
+
         public static Teacher GetTeacherByUserId(int userId)
         {
             var query = @"SELECT * FROM USERS 

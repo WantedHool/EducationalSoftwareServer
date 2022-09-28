@@ -142,6 +142,13 @@ namespace EducationalSoftwareServer
                        new { StudentId = studentAnswers[0].StudentId, TestId = studentAnswers[0].TestId,  TotalGrade = totalGrade }).FirstOrDefault();
             }
         }
+
+        public static List<Test> GetAllTestsFiltered(int studentId)
+        {
+            var tests = GetTestsByClass(1);
+            var answeredTestIds = GetTestResultsByStudentId(studentId).Select(x => x.TestId).ToList();
+            return tests.Where(x => !answeredTestIds.Contains(x.TestId) && x.Active).ToList();
+        }
         #endregion
         public static Test GenerateLearningDifficultyTest(int testId, string category)
         {

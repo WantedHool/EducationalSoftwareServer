@@ -30,6 +30,8 @@ import { GradesComponent } from './grades/grades.component';
 import { TheoryComponent } from './theory/theory.component';
 import { TestsComponent } from './tests/tests.component';
 import { StudentDetailComponent } from './student-detail/student-detail.component';
+import { ChaptersComponent } from './chapters/chapters.component';
+import { NewChapterComponent } from './new-chapter/new-chapter.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { NewtestComponent } from './newtest/newtest.component';
 
@@ -45,6 +47,8 @@ import { NewtestComponent } from './newtest/newtest.component';
     TheoryComponent,
     TestsComponent,
     StudentDetailComponent,
+    ChaptersComponent,
+    NewChapterComponent,
     QuestionsComponent,
     NewtestComponent
   ],
