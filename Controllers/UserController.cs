@@ -34,6 +34,12 @@ namespace EducationalSoftwareServer.Controllers
         }
 
         [HttpGet]
+        public IActionResult GetAllStudents(int userId)
+        {
+            return Ok(UserRepository.GetAllStudents());
+        }
+
+        [HttpGet]
         [Route("{userId}")]
         public IActionResult GetTeacherByUserId(int userId)
         {

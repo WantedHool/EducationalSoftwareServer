@@ -48,6 +48,17 @@ namespace EducationalSoftwareServer.Controllers
         {
             return Ok(TestRepository.GetStudentGrades(schoolClass));
         }
-
+        [HttpGet]
+        [Route("{class}")]
+        public IActionResult GetAnsweredTests (string schoolClass)
+        {
+            return Ok(TestRepository.GetStudentGrades(schoolClass));
+        }
+        [HttpGet]
+        [Route("{studentId}")]
+        public IActionResult GetAllTestsFiltered(int studentId)
+        {
+            return Ok(TestRepository.GetAllTestsFiltered(studentId));
+        }
     }
 }

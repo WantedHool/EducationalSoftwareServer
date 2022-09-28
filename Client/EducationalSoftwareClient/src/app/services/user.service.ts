@@ -37,4 +37,9 @@ export class UserService {
     this.url = environment.serverUrl + "/UserInterface/GetStudentById"
     return this.http.get<Student>(this.url, {params:params});
   }
+
+  getAllStudents(){
+    this.url = environment.serverUrl + "/User/GetAllStudents";
+    return this.http.get<User[]>(this.url)
+  }
 }

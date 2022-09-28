@@ -1,0 +1,28 @@
+<mat-card class="card">
+    <mat-card-title class="card_title">Create new chapter</mat-card-title>
+    <mat-card-content>
+        <form #userData="ngForm" class="loginForm" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="outline" class="textBox">
+                <mat-label>Όνομα</mat-label>
+                <input type="text" name="description" matInput class="textBox" [(ngModel)]="chapter.description">
+            </mat-form-field>
+
+            <br>
+
+            <mat-form-field appearance="outline" class="textBox">
+                <mat-label>Όνομα αρχείου PDF</mat-label>
+                <input type="text" name="pdfLink" matInput [(ngModel)]="chapter.pdfLink">
+            </mat-form-field>
+            <br>
+
+            <mat-form-field appearance="outline" class="textBox">
+                <mat-label>Όνομα αρχείου φωτογραφίας</mat-label>
+                <input type="text" name="photoLink" matInput [(ngModel)]="chapter.photoLink">
+            </mat-form-field>
+
+            <mat-card-actions>
+                <button type="submit" mat-raised-button color="primary" class="saveButton">Αποθήκευση</button>
+            </mat-card-actions>
+        </form>
+    </mat-card-content>
+</mat-card>
