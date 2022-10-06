@@ -21,8 +21,7 @@ export class ChaptersComponent implements OnInit {
     else if (localStorage.getItem("userType") == "1" ){
       this.userType = 'Teacher';
     }
-    this.chapterSrv.getAllChapters().subscribe(x => {console.log(x) 
-       this.dataSource = x});
+    this.chapterSrv.getAllChapters().subscribe(x => { this.dataSource = x });
   }
 
 }
