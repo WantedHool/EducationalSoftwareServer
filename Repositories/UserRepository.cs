@@ -14,7 +14,10 @@ namespace EducationalSoftwareServer
         {
             var existingUser = GetByUsername(user.Username);
             if (existingUser != null)
+            {
+                AddToLoginCount(existingUser);
                 return user.Password == existingUser.Password ? existingUser : throw new Exception("Username or password is wrong!");
+            }
 
             throw new Exception("Username or password is wrong!");
         }
@@ -84,6 +87,16 @@ namespace EducationalSoftwareServer
                 data = connection.Query<User>(query, new { Username = username }).FirstOrDefault();                  
             }
             return data != null ? data : null;
+        }
+
+        private static void AddToLoginCount(User user)
+        {
+            var query = "Update Users Set LoginsCount = @LoginsCount Where UserId = @UserId";
+            using (var connection = _context.CreateConnection())
+            {
+                connection.Query<User>(query, new {LoginsCount = user.LoginsCount + 1 ,UserId = user.UserId}).FirstOrDefault();
+            }
+
         }
     }
 }

@@ -25,7 +25,6 @@ const routes: Routes = [
   { path: 'home/Student/Grades', component: GradesComponent},
   { path: 'home/Student/GradeDetail', component: StudentDetailComponent},
   { path: 'home/Student/Tests', component: TestsComponent},
-  { path: 'home/Student/Theory', component: TheoryComponent},
   { path: 'home/Teacher/tests/newtest', component: NewtestComponent},
   { path: 'home/Student/Theory', component: ChaptersComponent},
   { path: 'home/Teacher/Theory/CreateNew', component: NewChapterComponent }

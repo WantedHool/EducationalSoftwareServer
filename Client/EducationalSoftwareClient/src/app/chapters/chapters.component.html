@@ -1,17 +1,25 @@
-<mat-grid-list cols="3" rowHeight="1:0.7">
+<mat-grid-list cols="4" rowHeight="1:0.7">
     <mat-grid-tile *ngFor="let element of dataSource">
       <mat-card>
         <mat-card-header>
-          <mat-card-title>Id: {{element.chapterId}} </mat-card-title>
-          <mat-card-subtitle>Κεφάλαιο: {{element.description}}</mat-card-subtitle>
+          <mat-card-title>Κεφάλαιο: {{element.description}}</mat-card-title>
         </mat-card-header>
-        <mat-card-content>
+        <mat-card-content style="text-align: center">
           <img src="{{element.photoLink}}"/>
         </mat-card-content>
         <mat-card-footer>
-            <a href="{{element.pdfLink}} " target="_blank" style="color: brown; text-align: center;">Άνοιγμα PDF<mat-icon>proceed</mat-icon> </a>
+          <button mat-icon-button color="primary" style="text-align: center">
+            <a href="assets/{{element.pdfLink}} " target="_blank" 
+            style="color: white;"><mat-icon style="color: white;">print</mat-icon>Άνοιγμα PDF</a>
+          </button>
         </mat-card-footer>
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
-  <a *ngIf="userType === 'Teacher'" href="home/Teacher/Theory/CreateNew">ClickMeeeeeeeeee!!!!</a>
+  <div class="col-md-2">
+  <button mat-icon-button color="primary"  *ngIf="userType === 'Teacher'" style = "padding-left: 35px;">
+    <a href="home/Teacher/Theory/CreateNew">  <mat-icon>library_add</mat-icon>
+      Προσθήκη Κεφαλαίου Θεωρίας</a>
+  </button>
+</div>
+  
