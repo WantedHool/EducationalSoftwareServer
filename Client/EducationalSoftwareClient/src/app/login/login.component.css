@@ -20,14 +20,14 @@
 }
 
 .register {
-    color:hotpink;
+    color:purple;
 }
 
 mat-card {
     margin       : 0 auto;
     width        : 20%;
     border-radius: 20px;
-    background-color: #404143 !important;
+    background-color: #99b4e9 !important;
 }
 
 .card_title {
