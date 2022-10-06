@@ -36,6 +36,7 @@ import { QuestionsComponent } from './questions/questions.component';
 import { NewtestComponent } from './newtest/newtest.component';
 import { StudentTestComponent } from './student-test/student-test.component';
 import {MatRadioModule} from '@angular/material/radio';
+import { QuestionanswersComponent } from './questionanswers/questionanswers.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import {MatRadioModule} from '@angular/material/radio';
     NewChapterComponent,
     QuestionsComponent,
     NewtestComponent,
-    StudentTestComponent
+    StudentTestComponent,
+    QuestionanswersComponent
   ],
   imports: [
     BrowserModule,

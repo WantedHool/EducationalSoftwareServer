@@ -1,54 +1,113 @@
-<div class="padding" style="color: black;">
-	<div class="row col-md-10">
-		<h2 style="color:black;">Καινούριο διαγώνισμα</h2>
-	</div>
-    <div>
-        <mat-form-field class="example-full-width title" appearance="fill" [(ngModel)]="test.description">
-            <mat-label>Τίτλος Διαγωνίσματος</mat-label>
-            <input matInput placeholder="Πληκτρολογήστε...">
-        </mat-form-field>
-    </div>
-    <div class="row col-12 popup-field">
-        <mat-checkbox style="margin:0px" name="active" [(ngModel)]="test.active">
-            Active
-        </mat-checkbox>
-    </div>
-	<div class="row col-md-2">
-		<button mat-icon-button color="primary" (click)="addNewQuestion()">
-			<mat-icon>library_add</mat-icon>
-			Προσθήκη ερώτησης
-		</button>
-	</div>
+<div class="padding" style="color: black">
+  <div class="row col-md-10">
+    <h2 style="color: black">Καινούριο διαγώνισμα</h2>
+  </div>
+  <div>
+    <mat-form-field
+      class="example-full-width title"
+      appearance="fill"
+      [(ngModel)]="test.description"
+    >
+      <mat-label>Τίτλος Διαγωνίσματος</mat-label>
+      <input matInput placeholder="Πληκτρολογήστε..." />
+    </mat-form-field>
+  </div>
+  <div class="row col-12 popup-field">
+    <mat-checkbox style="margin: 0px" name="active" [(ngModel)]="test.active">
+      Active
+    </mat-checkbox>
+  </div>
+  <div class="row col-md-2">
+    <button mat-icon-button color="primary" (click)="addNewQuestion()">
+      <mat-icon>library_add</mat-icon>
+      Προσθήκη ερώτησης
+    </button>
+  </div>
 </div>
 <div class="list-card" *ngFor="let question of test.questions; let i = index">
-    <div class="col-md-2">
-      <!-- <app-questions ></app-questions> -->
-      <div style="color:black;" class="padding ">
-        <form class="list-card" style="background-color:rgb(227, 227, 227);"> 
+  <div class="col-md-2">
+    <div style="color: black" class="padding">
+      <form class="list-card" style="background-color: rgb(227, 227, 227)">
+        <div class="row">
+          <div class="col-8" style="margin-top: 10px; margin-left: 30px;">
+            <h3>Εκφώνηση Άσκησης<span style="color: red">*</span></h3>
+            <mat-form-field
+              class="example-full-width"
+              appearance="fill"
+              [(ngModel)]="question.description">
+              <mat-label  style="padding-left: 20;">Εκφώνηση</mat-label>
+              <input matInput  style="padding-left: 20;" placeholder="Πληκτρολογήστε..." />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-md-3" >
+            <mat-label style="margin-left: 30px; margin-right: 20px;">Τύπος απάντησης:</mat-label>
+            <mat-select [(ngModel)]="selectedValue" name="questionTypes" style="width: 150px;" class="select">
+                <mat-option *ngFor="let type of questionTypes" [value]="type.value">
+                  {{type.viewValue}}
+                </mat-option>
+              </mat-select>
+        </div>
+        <div class="list-card">
             <div class="row">
-                <div class="col-8" style="margin-top: 10px;">
-                    <h3>Εκφώνηση Άσκησης<span style="color: red">*</span></h3>
-                    <mat-form-field class="example-full-width" appearance="fill" [(ngModel)]="question.description">
-                        <mat-label>Εκφώνηση</mat-label>
-                        <input matInput placeholder="Πληκτρολογήστε...">
-                    </mat-form-field>
-                    <!-- <div class="col-md-4">
-                        <mat-form-field class="popup-field">
-                            <mat-select [(ngModel)]="option.type" placeholder="Type"
-                                (ngModelChange)="onQuestionTypeChange(option)">
-                                <mat-option *ngFor="let questionType of questionsTypes">
-                                    {{questionType.value}}</mat-option>
-                            </mat-select>
+              <div style="color: black" class="padding">
+                <form
+                  class="list-card"
+                  style="background-color: rgb(227, 227, 227)">
+                    <div class=" col-8" style="margin-top: 10px">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="fill">
+                        <mat-label>Απάντηση 1:</mat-label>
+                        <input matInput placeholder="Πληκτρολογήστε..." />
+                      </mat-form-field>
+                        <mat-checkbox class="col-4 popup-field" style="margin-left: 20px" name="active" >
+                          Σωστή απάντηση
+                        </mat-checkbox>
+                    </div>
+                    <div class=" col-8" style="margin-top: 10px">
+                        <mat-form-field
+                          class="example-full-width"
+                          appearance="fill">
+                          <mat-label>Απάντηση 2:</mat-label>
+                          <input matInput placeholder="Πληκτρολογήστε..." />
                         </mat-form-field>
-                    </div> -->
-                </div>
+                          <mat-checkbox class="col-4 popup-field" style="margin-left: 20px" name="active">
+                            Σωστή απάντηση
+                          </mat-checkbox>
+                      </div>
+                      <div class=" col-8" style="margin-top: 10px">
+                        <mat-form-field
+                          class="example-full-width"
+                          appearance="fill">
+                          <mat-label>Απάντηση 3:</mat-label>
+                          <input matInput placeholder="Πληκτρολογήστε..." />
+                        </mat-form-field>
+                          <mat-checkbox class="col-4 popup-field" style="margin-left: 20px" name="active">
+                            Σωστή απάντηση
+                          </mat-checkbox>
+                      </div>
+                      <div class=" col-8" style="margin-top: 10px">
+                        <mat-form-field
+                          class="example-full-width"
+                          appearance="fill">
+                          <mat-label>Απάντηση 4:</mat-label>
+                          <input matInput placeholder="Πληκτρολογήστε..." />
+                        </mat-form-field>
+                          <mat-checkbox class="col-4 popup-field" style="margin-left: 20px" name="active">
+                            Σωστή απάντηση
+                          </mat-checkbox>
+                      </div>
+                </form>
+              </div>
             </div>
-        </form>
+        </div>
+      </form>
     </div>
-    </div>
+  </div>
 </div>
-<div mat-dialog-actions style="padding: 10px;">
-    <button mat-flat-button color="primary" (click)="saveTest()">Save</button>
-<br><br>
-    <button mat-flat-button>Cancel</button>
+<div mat-dialog-actions style="padding: 10px">
+  <button mat-flat-button color="primary" (click)="saveTest()">Save</button>
+  <br /><br />
+  <button mat-flat-button>Cancel</button>
 </div>
