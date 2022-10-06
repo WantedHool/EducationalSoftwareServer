@@ -1,37 +1,37 @@
 <section class="headSection">
     <div class="headText">
-        Educational Software
+        Εκπαιδευτικό Λογισμικό
     </div>
 </section>
 <br><br>
 
 <mat-card class="card">
-    <mat-card-title class="card_title">Login</mat-card-title>
+    <mat-card-title class="card_title">Σύνδεση χρήστη</mat-card-title>
     <mat-card-content>
         <form #userData="ngForm" class="loginForm" (ngSubmit)="onSubmit()">
             <mat-form-field appearance="outline" class="textBox">
-                <mat-label>Username</mat-label>
+                <mat-label>Όνομα χρήστη</mat-label>
                 <input type="text" name="username" matInput class="textBox" [(ngModel)]="user.username">
             </mat-form-field>
 
             <br>
 
             <mat-form-field appearance="outline" class="textBox">
-                <mat-label>Password</mat-label>
+                <mat-label>Κωδικός</mat-label>
                 <input type="password" name="password" matInput [(ngModel)]="user.password">
             </mat-form-field>
             <br>
 
             <mat-card-actions>
-                <button type="submit" mat-raised-button color="primary" class="saveButton">Login</button>
+                <button type="submit" mat-raised-button color="primary" class="saveButton">Σύνδεση</button>
             </mat-card-actions>
         </form>
 
         <mat-divider></mat-divider>
         <br>
-        <div>You don't have an account?</div>
+        <div>Δεν έχεις λογαριασμό;</div>
         <div>
-           <a (click)="goToRegister()" class="btn btn-link register">Register</a>
+           <a (click)="goToRegister()" class="btn btn-link register">Εγγραφή</a>
         </div>
     </mat-card-content>
 </mat-card>
