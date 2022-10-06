@@ -22,10 +22,10 @@ export class NewtestComponent implements OnInit {
   
   questionTypes: QuestionType[] = [
     // {value: 'textBox', viewValue: 'TextBox'},
-    {value: 'singleSelect', viewValue: 'SingleSelect'},
-    {value: 'numeric', viewValue: 'Numeric'},
-    {value: 'boolean', viewValue: 'Boolean'},
-    {value: 'multiselect', viewValue: 'Multiselect'}
+    {value: 'singleSelect', viewValue: 'Απλή επιλογής'},
+    {value: 'numeric', viewValue: 'Αριθμητική'},
+    {value: 'boolean', viewValue: 'Σ/Λ'},
+    {value: 'multiselect', viewValue: 'Πολλαπλής επιλογής'}
   ];
 
   constructor(private router: Router) {}
