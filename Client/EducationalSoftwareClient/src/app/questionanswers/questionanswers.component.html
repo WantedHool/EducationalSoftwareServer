@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col-2 offset-10">
+        <button mat-icon-button color="primary" (click)="addNewAnswer()">
+            <mat-icon>library_add</mat-icon>
+            Προσθήκη απάντησης
+        </button>
+    </div>
+</div>
+<div class="list-card" *ngFor="let answer of data; let i = index">
+    <div class="col-md-2">
+      <div style="color: black" class="padding">
+        <form class="list-card" style="background-color: rgb(227, 227, 227)">
+          <div class="row">
+            <div class="col-8" style="margin-top: 10px">
+              <h3>Απαντήσεις<span style="color: red">*</span></h3>
+              <mat-form-field
+                class="example-full-width"
+                appearance="fill"
+                [(ngModel)]="answer.answer">
+                <mat-label>Απάντηση</mat-label>
+                <input matInput placeholder="Πληκτρολογήστε..." />
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  
+<!-- <div class="list-card" *ngFor="let option of data; let i = index">
+    <div class="row col-12 align-items-center">
+        <div class="col-md-1">
+            <mat-icon style="vertical-align: middle;">chevron_right</mat-icon>
+        </div>
+        <div class="col-md-4">
+            <mat-form-field class="popup-field">
+                <input matInput name="option_{{optionIndex}}_OptionDescription_{{i}}" type="text" placeholder="Description" [ngModel]="getField(option, 'description')"
+                    (keyup)="setField(option, 'description', $event.target.value)" required/>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-2">
+            <mat-form-field class="popup-field">
+                <input matInput name="option_{{optionIndex}}_OptionPrice_{{i}}" type="number" placeholder="Price" [(ngModel)]="option.price"
+                    min="0" step=".01" />
+            </mat-form-field>
+        </div>
+        <div class="col-md-2">
+            <div class="popup-field">
+                <mat-checkbox [(ngModel)]="option.preSelected" name="option_{{optionIndex}}_OptionPreselected_{{i}}" (change)="managePreSelected($event, option)">PreSelected
+                </mat-checkbox>
+            </div>
+        </div>
+        <div class="col-md-1 offset-md-2">
+            <button mat-icon-button color="warn" (click)="remove(option)">
+                <i class="material-icons">
+                    close
+                </i>
+            </button>
+        </div>
+    </div>
+
+ </div> -->
+
+

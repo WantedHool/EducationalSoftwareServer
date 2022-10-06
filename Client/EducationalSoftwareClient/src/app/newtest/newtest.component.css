@@ -3,6 +3,15 @@
 }
 
 .title{
-    background-color:rgb(227, 227, 227);
+    background-color:transparent;
 }
 
+.button {
+    float: right;
+  }
+.select {
+    background-color: white;   
+    color: black;
+    border : 1px solid #666666;
+
+}

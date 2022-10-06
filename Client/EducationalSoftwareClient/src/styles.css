@@ -3,7 +3,7 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-drawer-container {
-    background-color: #d5d3d3;
+    background-color: #f8f7f7;
 }
 
 .mat-checkbox-inner-container{
@@ -20,4 +20,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .mat-checkbox-frame {
     border-color: black;
+}
+.mat-select-value {
+    color: rgb(0, 0, 0);
+}
+.mat-select-arrow {
+  color:black;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: rgb(255 255 255);
 }

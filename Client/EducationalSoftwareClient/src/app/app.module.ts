@@ -34,6 +34,7 @@ import { ChaptersComponent } from './chapters/chapters.component';
 import { NewChapterComponent } from './new-chapter/new-chapter.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { NewtestComponent } from './newtest/newtest.component';
+import { QuestionanswersComponent } from './questionanswers/questionanswers.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { NewtestComponent } from './newtest/newtest.component';
     ChaptersComponent,
     NewChapterComponent,
     QuestionsComponent,
-    NewtestComponent
+    NewtestComponent,
+    QuestionanswersComponent
   ],
   imports: [
     BrowserModule,
