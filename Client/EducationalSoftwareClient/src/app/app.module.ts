@@ -34,7 +34,8 @@ import { ChaptersComponent } from './chapters/chapters.component';
 import { NewChapterComponent } from './new-chapter/new-chapter.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { NewtestComponent } from './newtest/newtest.component';
-
+import { StudentTestComponent } from './student-test/student-test.component';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { NewtestComponent } from './newtest/newtest.component';
     ChaptersComponent,
     NewChapterComponent,
     QuestionsComponent,
-    NewtestComponent
+    NewtestComponent,
+    StudentTestComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +77,8 @@ import { NewtestComponent } from './newtest/newtest.component';
     MatSortModule,
     FormsModule,
     HttpClientModule,
-    MatGridListModule
+    MatGridListModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

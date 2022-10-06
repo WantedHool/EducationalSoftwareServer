@@ -1,0 +1,12 @@
+<mat-card class="card">
+    <mat-card-title class="card_title">{{currentQuestion.description}}</mat-card-title>
+    <mat-card-content>
+            <div *ngFor="let answer of currentQuestion.questionAnswers">
+                    <mat-checkbox name="answer_{{answer.questionAnswerId}}" (change)="addAnswer($event, answer.answer)" value="answer.questionAnswerId">{{answer.answer}}</mat-checkbox>
+            <br>
+        </div>
+            <mat-card-actions>
+                <button mat-raised-button color="primary" class="saveButton" (click)="onClick()">Next</button>
+            </mat-card-actions>
+    </mat-card-content>
+</mat-card>

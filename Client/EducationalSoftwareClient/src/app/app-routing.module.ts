@@ -10,6 +10,7 @@ import { RegisterComponent } from './register/register.component';
 import { StudentDetailComponent } from './student-detail/student-detail.component';
 import { TestsComponent } from './tests/tests.component';
 import { TheoryComponent } from './theory/theory.component';
+import { StudentTestComponent } from './student-test/student-test.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -27,7 +28,8 @@ const routes: Routes = [
   { path: 'home/Student/Tests', component: TestsComponent},
   { path: 'home/Teacher/tests/newtest', component: NewtestComponent},
   { path: 'home/Student/Theory', component: ChaptersComponent},
-  { path: 'home/Teacher/Theory/CreateNew', component: NewChapterComponent }
+  { path: 'home/Teacher/Theory/CreateNew', component: NewChapterComponent },
+  { path: 'home/Student/Test', component: StudentTestComponent},
 ];
 
 @NgModule({

@@ -60,5 +60,12 @@ namespace EducationalSoftwareServer.Controllers
         {
             return Ok(TestRepository.GetAllTestsFiltered(studentId));
         }
+
+        [HttpGet]
+        [Route("{testId}")]
+        public IActionResult GetTestById(int testId)
+        {
+            return Ok(TestRepository.GetTestById(testId));
+        }
     }
 }

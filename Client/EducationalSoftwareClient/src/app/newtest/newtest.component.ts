@@ -26,7 +26,6 @@ export class NewtestComponent implements OnInit {
 		option.category = "";
     option.questionAnswers=[];
 		this.test.questions.push(option);
-    console.log(this.test);
 	}
 
   saveTest(){

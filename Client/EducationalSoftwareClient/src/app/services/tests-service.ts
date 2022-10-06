@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 
 import { environment } from 'src/environments/environment';
+import { StudentAnswer } from '../models/student-answer';
 import { User } from '../models/user';
 
 @Injectable({
@@ -26,5 +27,15 @@ export class TestsService {
   getStudentsGrades(schoolClass: string){
     this.url = environment.serverUrl + "/Test/GetStudentsGrades/" + schoolClass;
     return this.http.get(this.url);
+  }
+
+  getTestById(testId: number){
+    this.url = environment.serverUrl + "/Test/GetTestById/" + testId.toString();
+    return this.http.get(this.url);
+  }
+
+  answerTest(data: StudentAnswer[]):Observable<StudentAnswer[]> {
+    this.url = environment.serverUrl + "/Test/AnswerTest";
+    return this.http.post<StudentAnswer[]>(this.url, data);
   }
 }
