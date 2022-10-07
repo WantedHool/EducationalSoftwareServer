@@ -46,8 +46,12 @@
         <br>
 
         <mat-form-field appearance="outline">
-            <mat-label>Τάξη</mat-label>
-            <input type="number" name="class" matInput [(ngModel)]="student.class" required min="1">
+            <mat-label>Τάξη:</mat-label>
+            <mat-select  [(ngModel)]="student.class" name="studentClass" style="width: 150px;" class="select" required >
+                <mat-option *ngFor="let stClass of studentClasses" [value]="stClass.value">
+                  {{stClass.viewValue}}
+                </mat-option>
+              </mat-select>
         </mat-form-field>
         <br>
 
