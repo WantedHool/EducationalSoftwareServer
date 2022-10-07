@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Student } from '../models/student';
+import { Test } from '../models/test';
 import { TestsService } from '../services/tests-service';
 
 @Component({
@@ -33,6 +34,7 @@ export class TestsComponent implements OnInit {
   }
 
   openTest(testId: number){
+    let test = (this.dataSource as Test[]).find(x => x.testId === testId);
     localStorage.setItem('testId',testId.toString());
     this.router.navigate(['home/Student/Test']);
   }

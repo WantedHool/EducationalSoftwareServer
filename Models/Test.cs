@@ -13,6 +13,8 @@ namespace EducationalSoftwareServer.Models
         public string Description { get; set; }
         public int Class { get; set; }
         public bool Active { get; set; }
+        public int? StudentId { get; set; }
+        public string Category { get; set; }
         public List<Question> Questions { get; set; }
     }
 }

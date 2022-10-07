@@ -63,13 +63,20 @@ namespace EducationalSoftwareServer
             using (var connection = _context.CreateConnection())
             {
                 test = connection.Query<Test>(testQuery, new {TestId = testId}).FirstOrDefault();
-                
-                test.Questions = connection.Query<Question>(questionsQuery, new { TestId = testId }).ToList();
 
-                foreach (var question in test.Questions)
+                if (test.StudentId != null)
                 {
-                    question.QuestionAnswers = connection.Query<QuestionAnswer>(questionAnswersQuery, new {QuestionId = question.QuestionId}).ToList();
-                }               
+                    test = GenerateLearningDifficultyTest(testId, test.Category);
+                }
+                else
+                {
+                    test.Questions = connection.Query<Question>(questionsQuery, new { TestId = testId }).ToList();
+
+                    foreach (var question in test.Questions)
+                    {
+                        question.QuestionAnswers = connection.Query<QuestionAnswer>(questionAnswersQuery, new { QuestionId = question.QuestionId }).ToList();
+                    }
+                }              
             }
             return test;
         }
@@ -145,7 +152,9 @@ namespace EducationalSoftwareServer
 
         public static List<Test> GetAllTestsFiltered(int studentId)
         {
-            var tests = GetTestsByClass(1);
+            var tests = GetTestsByClass(1).Where(x => x.StudentId == null).ToList();
+            var studentTest = GetTestsByClass(1).Where(x => x.StudentId == studentId).ToList();
+            tests.AddRange(studentTest);
             var answeredTestIds = GetTestResultsByStudentId(studentId).Select(x => x.TestId).ToList();
             return tests.Where(x => !answeredTestIds.Contains(x.TestId) && x.Active).ToList();
         }
@@ -198,16 +207,16 @@ namespace EducationalSoftwareServer
                           OUTPUT  inserted.*
                           VALUES(@StudentId,@Category,@TestId)";
 
-                    var learningDifficultyTestQuery = @"INSERT INTO TESTS (Description,Active,StudentId) 
+                    var learningDifficultyTestQuery = @"INSERT INTO TESTS
                           OUTPUT  inserted.*
-                          VALUES(@Description,@Active,@StudentId)";
+                          VALUES(@Description,@ChapterId,@Class,@Active,@StudentId, @Category)";
                     using (var connection = _context.CreateConnection())
                     {
                         var test = connection.Query<Test>(learningDifficultyTestQuery,
-                        new { Description = "kati", Active = true, StudentId = rightAnswers[0].StudentId }).FirstOrDefault();
+                        new { Description = "TestMathisiakesDyskolies",ChapterId = 0,Class = 1, Active = true, StudentId = wrongAnswers[0].StudentId, Category = c }).FirstOrDefault();
 
                         connection.Query<LearningDifficulty>(learningDifficultiesQuery,
-                        new { StudentId = rightAnswers[0].StudentId, Category = c, TestId = test.TestId });
+                        new { StudentId = wrongAnswers[0].StudentId, Category = c, TestId = test.TestId });
 
                         
                     }
