@@ -31,7 +31,7 @@ export class StudentTestComponent implements OnInit {
 
   onClick() {
     if (this.count === this.test.questions.length) {
-      this.testsSrv.answerTest(this.studentAnswers).subscribe(x => this.router.navigate(['home/Teacher/theory']));
+      this.testsSrv.answerTest(this.studentAnswers).subscribe(x => this.router.navigate(['home/Student/grades']));
     }
     else {
       this.currentQuestion = this.test.questions[this.count];
