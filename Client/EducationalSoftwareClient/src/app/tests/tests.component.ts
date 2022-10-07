@@ -27,6 +27,9 @@ export class TestsComponent implements OnInit {
     }
     else if (localStorage.getItem("userType") == "1" )
       this.userType = "Teacher"
+      this.testsSrv.getAllTests().subscribe(x =>{
+        this.dataSource = x;
+      });
   }
 
   addNewTest(): void {
