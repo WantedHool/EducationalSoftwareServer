@@ -194,7 +194,7 @@ namespace EducationalSoftwareServer
 
             var rightAnswersExtra = rightAnswers.Join(questions, rightAnswer => rightAnswer.QuestionId, question => question.QuestionId, (rightAnswer, question) => question);
 
-            var categories = new List<string>() { "A", "B", "C" };
+            var categories = new List<string>() { "spelling", "vocabulary", "grammar" };
 
             categories.ForEach(c =>
             {

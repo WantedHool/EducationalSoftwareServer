@@ -34,7 +34,6 @@ export class TestsComponent implements OnInit {
   }
 
   openTest(testId: number){
-    let test = (this.dataSource as Test[]).find(x => x.testId === testId);
     localStorage.setItem('testId',testId.toString());
     this.router.navigate(['home/Student/Test']);
   }
