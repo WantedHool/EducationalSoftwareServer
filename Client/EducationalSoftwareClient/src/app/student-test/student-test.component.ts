@@ -21,10 +21,9 @@ export class StudentTestComponent implements OnInit {
               public router: Router) { }
 
   ngOnInit(): void {
-    debugger
     let testId = Number(localStorage.getItem('testId'));
     this.studentId = ((JSON.parse(localStorage.getItem('student') ?? '')) as Student).studentId ?? 0
-    this.testsSrv.getTestById(5).subscribe(x => {
+    this.testsSrv.getTestById(testId).subscribe(x => {
       this.test = x as Test
       this.currentQuestion = this.test.questions[0]
     })
