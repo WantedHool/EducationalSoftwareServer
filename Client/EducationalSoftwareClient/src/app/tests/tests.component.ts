@@ -31,4 +31,9 @@ export class TestsComponent implements OnInit {
   addNewTest(): void {
     this.router.navigate(["home/Teacher/tests/newtest"]);
   }
+
+  openTest(testId: number){
+    localStorage.setItem('testId',testId.toString());
+    this.router.navigate(['home/Student/Test']);
+  }
 }
